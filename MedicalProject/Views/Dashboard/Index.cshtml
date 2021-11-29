@@ -1,0 +1,669 @@
+﻿
+@model MedicalProject.Models.DashboardModel
+
+@{
+    ViewBag.Title = "DashBoard";
+}
+@{
+    Html.RenderPartial("_SideLayout");
+}
+<!DOCTYPE html>
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+    <title>Doughnut Chart</title>
+</head>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="content-container">
+
+
+
+            <div class="container-fluid">
+
+                @*<h2>Dashboard</h2>*@
+
+
+
+
+                @*<p><a href="@Url.Action("GenerateReport","Bill")">Add Bill</a></p>*@
+
+                @if (Session["UserName"] != null)
+                {<text>
+                        <h4> Welcome @Session["UserName"].ToString()</h4> </text>
+                }
+                <section class="content-header">
+                    <h1>
+                        Dashboard
+                        <small>Control panel</small>
+                    </h1>
+
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>Total Sales</h3>
+                                    <h4 style="text-align:center">@ViewBag.sales</h4>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>Total Product<sup style="font-size: 20px"></sup></h3>
+                                    <h4 style="text-align:center">@ViewBag.product</h4>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3>Total Purchase</h3>
+                                    <h4 style="text-align:center">@ViewBag.purchase</h4>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>65</h3>
+                                    <p>This Month</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                    </div>
+                    <!-- /.row -->
+                    <!-- Main row -->
+                    <!-- /.row (main row) -->
+                </section>
+                <div class="row" style="margin-top:50px;">
+                    <div id="chartContainer" style="height: 370px; width: 100%; margin-top: 40px; "></div>
+                    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                </div>
+
+
+                <!-- Main row -->
+                <div class="row" style="margin-top:40px;">
+                    <!-- Left col -->
+                    <section class="col-lg-7 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <!-- DONUT CHART -->
+                        <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Product  Chart</h3>
+                                <div class="box-tools pull-left">
+                                    <div id="chartContainer7" style="height: 370px; width: 100%; margin-top: 40px; "></div>
+                                    <script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer7", {
+                title: {
+                    text: ""
+                },
+                animationEnabled: true,
+                legend: {
+                    fontSize: 20,
+                    fontFamily: "Helvetica"
+                },
+                theme: "light2",
+               data: [
+                {
+                    type: "doughnut",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label} {y}%",
+                    startAngle: -20,
+                    showInLegend: true,
+                       toolTipContent: "{legendText} {y}%",
+                        dataPoints: [
+                            { y: @ViewBag.purchase, legendText: "Purchase", label: "Purchase" },
+                            { y: @ViewBag.sales , legendText: "Sales", label: "Sales" },
+                            { y: @ViewBag.product, legendText: "Products!", label: "Products!" },
+                            { y: @ViewBag.Available, legendText: "Available", label: "Available!" },
+
+                    ],
+
+                    //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                }
+                ]
+            });
+            chart.render();
+        };
+
+                                    </script>
+
+
+
+                                </div>
+                            </div>
+                            
+
+
+
+                            <div class="box-body chart-responsive">
+                                <div class="chart" id="product" style="height: 300px; position: relative;"></div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.nav-tabs-custom -->
+                    </section>
+
+
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5 connectedSortable">
+                        <!-- TO DO List -->
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <i class="ion ion-clipboard"></i>
+                                <h3 class="box-title">Report</h3>
+                                @*<div class="box-tools pull-right">
+                                        <ul class="pagination pagination-sm inline">
+                                            <li><a href="#">«</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">»</a></li>
+                                        </ul>
+                                    </div>*@
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+                                <ul class="todo-list">
+                                    <li>
+                                        <!-- drag handle -->
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+                                        <!-- checkbox -->
+                                        <!-- todo text -->
+                                        <span class="text">Total Purchase Amount (INR):</span>
+                                        <!-- Emphasis label -->
+                                        <small class="label label-danger"><i class="fa fa-clock-o"></i> @ViewBag.totalpurchaseamount </small>
+                                        <!-- General tools such as edit or delete-->
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+
+                                        <span class="text">Total Sales Amount (INR):</span>
+                                        <small class="label label-info"><i class="fa fa-clock-o"></i> @ViewBag.totalsalesamount </small>
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+
+                                        <span class="text">Total Products Price (INR):</span>
+                                        <small class="label label-warning"><i class="fa fa-clock-o"></i> @ViewBag.prices </small>
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                        <!-- /.box -->
+                    </section>
+                    <!-- right col -->
+                </div>
+
+                <div class="row" style="margin-top:100px;">
+                    <!-- Left col -->
+                    <section class="col-lg-7 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <!-- DONUT CHART -->
+                        <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Tranaction Status Chart</h3>
+                                <div class="box-tools pull-left">
+
+                                    <div id="chartContainer3" style="width: 45%; height: 300px;display: inline-block;">
+                                        <script>
+
+                                        var chart = new CanvasJS.Chart("chartContainer3",
+                                            {
+                                               animationEnabled: true,
+                title: {
+                    text: "Transaction Status"
+                },
+                axisX: {
+                    title: ""
+                },
+                axisY: {
+                    title: "percentage"
+                },
+                data: [
+                {
+                    type: "stackedColumn100",
+                    legendText: "Paid",
+                    showInLegend: "true",
+                    indexLabel: "#percent %",
+                    indexLabelPlacement: "inside",
+                    indexLabelFontColor: "white",
+                    dataPoints: [
+                        { y: 40, label: "Transaction Status" }
+
+                    ],
+
+                    //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                },
+                {
+                    type: "stackedColumn100",
+                    legendText: "Due",
+                    showInLegend: "true",
+                    indexLabel: "#percent %",
+                    indexLabelPlacement: "inside",
+                    indexLabelFontColor: "white",
+                    dataPoints: [
+                        { y: 20, label: "Transaction Status" }
+
+                    ],
+
+                    //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                }
+                ]
+            });
+            chart.render();
+                                        </script>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="box-body chart-responsive">
+                                <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.nav-tabs-custom -->
+                    </section>
+
+
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5 connectedSortable">
+                        <!-- TO DO List -->
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <i class="ion ion-clipboard"></i>
+                                <h3 class="box-title">Report</h3>
+                                @*<div class="box-tools pull-right">
+                                        <ul class="pagination pagination-sm inline">
+                                            <li><a href="#">«</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">»</a></li>
+                                        </ul>
+                                    </div>*@
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+                                <ul class="todo-list">
+                                    <li>
+                                        <!-- drag handle -->
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+                                        <!-- checkbox -->
+                                        <!-- todo text -->
+                                        <span class="text">Paid Transaction Total Amount(INR):</span>
+                                        <!-- Emphasis label -->
+                                        <small class="label label-danger"><i class="fa fa-clock-o"></i>  </small>
+                                        <!-- General tools such as edit or delete-->
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+
+                                        <span class="text">Due Transaction Total Amount (INR):</span>
+                                        <small class="label label-info"><i class="fa fa-clock-o"></i> </small>
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+
+                                        <span class="text">Total Products Price (INR):</span>
+                                        <small class="label label-warning"><i class="fa fa-clock-o"></i> @ViewBag.prices </small>
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                        <!-- /.box -->
+                    </section>
+                    <!-- right col -->
+                </div>
+
+
+                <div class="row" style="margin-top:50px;">
+                    <!-- Left col -->
+                    <section class="col-lg-7 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <!-- DONUT CHART -->
+                        <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Profit Chart</h3>
+                                <div class="box-tools pull-left">
+
+                                    <div id="chartContainer5" style="width: 45%; height: 300px;display: inline-block;">
+                                        <script>
+                                        var chart = new CanvasJS.Chart("chartContainer5", {
+                                            theme: "light2",
+                                            animationEnabled: true,
+                                            title: {
+                                                text: ""
+                                            },
+                                            data: [
+                                                {
+                                                    type: "column",
+                                                    dataPoints: [
+
+                                                        { y: @ViewBag.Sumbuying, label: "Buying Amount(INR)" },
+                                                        { y:  @ViewBag.SumSelling, label: "Selling Amount(INR)" },
+                                                        { y: @ViewBag.profit, label: "Profit Amount(INR)" }
+
+                                                    ]
+                                                }
+                                            ]
+                                        });
+                                        chart.render();
+                                        </script>
+                                    </div>
+
+                                   
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="box-body chart-responsive">
+                                <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.nav-tabs-custom -->
+                    </section>
+
+
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5 connectedSortable">
+                        <!-- TO DO List -->
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <i class="ion ion-clipboard"></i>
+                                <h3 class="box-title">Report</h3>
+                                @*<div class="box-tools pull-right">
+                                        <ul class="pagination pagination-sm inline">
+                                            <li><a href="#">«</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">»</a></li>
+                                        </ul>
+                                    </div>*@
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+                                <ul class="todo-list">
+                                    <li>
+                                        <!-- drag handle -->
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+                                        <!-- checkbox -->
+                                        <!-- todo text -->
+                                        <span class="text">Total Purchase Amount (INR):</span>
+                                        <!-- Emphasis label -->
+                                        <small class="label label-danger"><i class="fa fa-clock-o"></i> @ViewBag.Sumbuying </small>
+                                        <!-- General tools such as edit or delete-->
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+
+                                        <span class="text">Total Sales Amount (INR):</span>
+                                        <small class="label label-info"><i class="fa fa-clock-o"></i> @ViewBag.SumSelling </small>
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+
+                                        <span class="text">Total Profit Price(INR):</span>
+                                        <small class="label label-warning"><i class="fa fa-clock-o"></i> @ViewBag.profit </small>
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+
+
+
+                                        @Html.LabelFor(model => model.startdate, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                                        @Html.TextBoxFor(model => model.startdate, new { @type = "date", @class = "form-control datepicker", @Value = ViewBag.Start })
+                                        @Html.ValidationMessageFor(model => model.startdate, "", new { @class = "text-danger" })
+
+
+
+
+                                    </li>
+                                    <li>
+
+
+
+                                        @Html.LabelFor(model => model.enddate, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                                        @Html.TextBoxFor(model => model.enddate, new { @type = "date", @class = "form-control datepicker", @Value = ViewBag.end })
+                                        @Html.ValidationMessageFor(model => model.enddate, "", new { @class = "text-danger" })
+
+
+
+
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="Submit" class="btn btn-success" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                        <!-- /.box -->
+                    </section>
+                    <!-- right col -->
+                </div>
+
+                <div class="row" style="margin-top:50px;">
+                    <!-- Left col -->
+                    <section class="col-lg-7 connectedSortable" style="align-content:center;">
+                        <script>
+            window.onload = function () {
+
+                CanvasJS.addColorSet("greenShades",
+                    [//colorSet Array
+
+                        "Red",
+                        "Grey",
+                        "Brown",
+                        "Yellow",
+                        "pink",
+                        "Blue",
+
+                    ]);
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    colorSet: "greenShades",
+            animationEnabled: true,
+
+            theme: "light2", // "light1", "dark1", "dark2"
+            exportEnabled: true,
+            title: {
+            text: "Category"
+            },
+            data: [{
+            type: "pie",
+            dataPoints: @Html.Raw(ViewBag.readdata)
+            }]
+            });
+            chart.render();
+
+
+
+            }
+
+                        </script>
+
+                        <div id="chartContainer" style="height: 50%; width: 50%; margin-left:20px; margin-bottom:500px;"></div>
+
+
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+
+                    </section>
+                </div>
+
+
+
+
+                <!-- Morris.js charts -->
+                <script src="bower_components/raphael/raphael.min.js"></script>
+                <script src="bower_components/morris.js/morris.min.js"></script>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <style>
+
+        .content-container {
+            padding-top: 20px;
+        }
+
+        .content-container {
+            padding-left: 220px;
+        }
+
+        .box-body {
+            padding-top: 10px;
+            border-style: ridge;
+            border-block-color: black;
+        }
+
+        .row {
+            border-style: ridge;
+            border-radius: 2em;
+        }
+
+        .col-lg-3 col-xs-6 {
+            margin-top: 20px;
+            border-style: ridge;
+            border-radius: 2em;
+        }
+    </style>
+}

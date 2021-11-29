@@ -1,0 +1,86 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "StatusView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Html.RenderPartial("_SideLayout");
+}
+<div class="container">
+    <div class="content-container">
+
+        <div class="container-fluid">
+
+            <h2 style="text-align:center">List Of Payment Status</h2>
+
+           @using (Html.BeginForm("StatusView", "Status", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div style="margin-top:-10px; margin-left:650px;">
+                        <input type="submit" value="Delete All" class="btn btn-danger" onclick="return confirm('Are you sure?')" />
+                        <input type="button" value="Add Status" class="btn btn-success" onclick="location.href='@Url.Action("StatusInsert","Status")'" />
+                    </div>
+
+
+                </div>
+               
+
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Select</th>
+                        <th> Name</th>
+
+
+
+
+
+                    </tr>
+                    @for (int i = 0; i < Model.Rows.Count; i++)
+                    {
+                        <tr>
+
+                            <td><input type="checkbox" name="checks" id="checks" value="@Model.Rows[i][0]" /></td>
+
+                            @*<td>@Model.Rows[i][0]</td>*@
+                            <td>@Model.Rows[i][1]</td>
+
+
+
+                            <td>
+                                <a href="@Url.Action("StatusUpdate","Status", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-warning" onclick="return confirm ('Are you sure want to Update blog?');">
+                                    <i class="glyphicon glyphicon-remove"></i> Update
+                                </a>
+                                <a href="@Url.Action("StatusDelete","Status", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-danger" onclick="return confirm ('Are you sure want to delete blog?');">
+                                    <i class="glyphicon glyphicon-remove"></i> Delete
+                                </a>
+
+
+                            </td>
+
+
+                        </tr>
+                    }
+
+
+
+                </table>
+
+            }
+            @*<p><a href="@Url.Action("StatusInsert","Status")">Add Payment Status</a></p>*@
+
+
+        </div>
+
+    </div>
+</div>
+<style>
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+</style>
+
+

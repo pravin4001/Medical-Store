@@ -1,0 +1,72 @@
+﻿@model MedicalProject.Models.Login
+@{
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    //Layout = "~/Views/Shared/_SideLayout.cshtml";
+
+}
+
+
+<div class="container-fluid" style="padding-left:120px; margin-top:120px; margin-left:180px; margin-right:220px;">
+    <div class="row-fluid">
+        <div style="background-image: url(' /UserImages/pharmacy.jpg'); border-radius:2em; background-size:contain">
+            <div class="table" width="30%" cellpadding="3" cellspacing="3" style="border:ridge; border-radius:2em;">
+
+                <div class="center-block roundedDiv col-lg-offset-3" style="width:250px; height:350px;">
+
+                    <div style="max-width: 400px;">
+
+                        @using (Html.BeginForm("LoginForm", "Login", FormMethod.Post))
+                        {
+
+                            <h2 class="form-signin-heading" style="text-align:center; color:black; font-size:48px;">
+
+                                Login
+                            </h2>
+                            <br />
+                            @Html.LabelFor(m => m.UserName)
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            <div>
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "error" })
+                            </div>
+                            <br />
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            <div>
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-10">
+                                    <input type="submit" value="Login" class="btn btn-primary" />
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            <div>
+                                @Html.ActionLink("Not Registerd yet ? Click Here ", "RegistrationForm")
+
+                            </div>
+
+                        }
+
+
+
+                        <h1>@Html.ViewData["Message"]</h1>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

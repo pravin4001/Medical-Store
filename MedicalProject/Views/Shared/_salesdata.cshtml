@@ -1,0 +1,357 @@
+﻿
+@model MedicalProject.Models.DashboardModel
+
+@{
+    ViewBag.Title = "DashBoard";
+}
+
+
+<!DOCTYPE html>
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <title>Doughnut Chart</title>
+</head>
+<div class="container">
+    <div class="content-container">
+
+
+
+        <div class="container-fluid">
+
+            @*<h2>Dashboard</h2>*@
+
+
+
+
+
+            <!--<!-- /.row -->
+            <!-- Main row -->
+            <!--<div class="row">-->
+                <!-- Left col -->
+                <!--<section class="col-lg-7 connectedSortable">-->
+                    <!-- Custom tabs (Charts with tabs)-->
+                    <!-- DONUT CHART -->
+                    <!--<div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Donut Chart</h3>
+                            <div class="box-tools pull-left">
+
+                                <div id="chartContainer"></div>
+                                <script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: ""
+                },
+                animationEnabled: true,
+                legend: {
+                    fontSize: 20,
+                    fontFamily: "Helvetica"
+                },
+                theme: "light2",
+               data: [
+                {
+                    type: "doughnut",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label} {y}%",
+                    startAngle: -20,
+                    showInLegend: true,
+                    toolTipContent: "{legendText} {y}%",
+                        dataPoints: [
+                            { y: @ViewBag.purchase, legendText: "Purchase", label: "Purchase" },
+                            { y: @ViewBag.sales , legendText: "Sales", label: "Sales" },
+                        { y: @ViewBag.product, legendText: "Products!", label: "Products!" },
+
+                    ],
+
+                    //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                }
+                ]
+            });
+            chart.render();
+        };
+
+                                </script>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                        </div>-->
+                        <!-- /.box-body -->
+                    <!--</div>-->
+                    <!-- /.nav-tabs-custom -->
+                <!--</section>-->
+
+
+                <!-- /.Left col -->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <!--<section class="col-lg-5 connectedSortable">-->
+                    <!-- TO DO List -->
+                    <!--<div class="box box-primary">
+                        <div class="box-header">
+                            <i class="ion ion-clipboard"></i>
+                            <h3 class="box-title">Report</h3>-->
+                            @*<div class="box-tools pull-right">
+                                    <ul class="pagination pagination-sm inline">
+                                        <li><a href="#">«</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">»</a></li>
+                                    </ul>
+                                </div>*@
+                        </div>-->
+                        <!-- /.box-header -->
+                        <!--<div class="box-body">-->
+                            <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+                            <!--<ul class="todo-list">
+                                <li>-->
+                                    <!-- drag handle -->
+                                    <!--<span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>-->
+                                    <!-- checkbox -->
+                                    <!-- todo text -->
+                                    <!--<span class="text">Total Purchase Amount</span>-->
+                                    <!-- Emphasis label -->
+                                    <!--<small class="label label-danger"><i class="fa fa-clock-o"></i> @ViewBag.totalpurchaseamount .Rs</small>-->
+                                    <!-- General tools such as edit or delete-->
+                                    <!--<div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+
+                                    <span class="text">Total Sales Amount</span>
+                                    <small class="label label-info"><i class="fa fa-clock-o"></i> @ViewBag.totalsalesamount .Rs</small>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+
+                                    <span class="text">Total Products Price</span>
+                                    <small class="label label-warning"><i class="fa fa-clock-o"></i> @ViewBag.prices .Rs</small>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>-->
+                        <!-- /.box-body -->
+
+                    <!--</div>-->
+                    <!-- /.box -->
+                <!--</section>-->
+                <!-- right col -->
+            <!--</div>-->
+            <!-- /.row (main row) -->
+            <!-- Morris.js charts -->
+            <!--<script src="bower_components/raphael/raphael.min.js"></script>
+            <script src="bower_components/morris.js/morris.min.js"></script>-->
+
+
+
+        </div>
+    </div>
+
+
+
+<script>
+var chart = new CanvasJS.Chart("chartContainer",
+	{
+  title: {
+  	text: "Chart with Date Selector"
+  },
+  data: [
+		{
+    	type: "line",
+    	dataPoints: randomData(new Date(2017, 0, 1), 400)
+    }
+  ]
+});
+chart.render();
+
+var axisXMin = chart.axisX[0].get("minimum");
+var axisXMax = chart.axisX[0].get("maximum");
+
+function randomData(startX, numberOfY){
+var xValue, yValue = 0;
+for (var i = 0; i < 400; i += 1) {
+				xValue = new Date(startX.getTime() + (i * 24 * 60 * 60 * 1000));
+				yValue += (Math.random() * 10 - 5) << 0;
+
+				dps.push({
+					x: xValue,
+					y: yValue
+				});
+			}
+      return dps;
+}
+
+    $(function () {
+        $("#fromDate").val(CanvasJS.formatDate(axisXMin, "DD MMM YYYY"));
+        $("#toDate").val(CanvasJS.formatDate(axisXMax, "DD MMM YYYY"));
+        $("#fromDate").datepicker({ dateFormat: "d M yy" });
+        $("#toDate").datepicker({ dateFormat: "d M yy" });
+    });
+
+    $("#date-selector").change(function () {
+        var minValue = $("#fromDate").val();
+        var maxValue = $("#toDate").val();
+
+        if (new Date(minValue).getTime() < new Date(maxValue).getTime()) {
+            chart.axisX[0].set("minimum", new Date(minValue));
+            chart.axisX[0].set("maximum", new Date(maxValue));
+        }
+    });
+
+    $(".period").click(function () {
+        var period = this.id;
+        var minValue;
+        minValue = new Date(axisXMax);
+
+        switch (period) {
+            case "1m":
+                minValue.setMonth(minValue.getMonth() - 1);
+                break;
+            case "3m":
+                minValue.setMonth(minValue.getMonth() - 3);
+                break;
+            case "6m":
+                minValue.setMonth(minValue.getMonth() - 6);
+                break;
+            case "1y":
+                minValue.setYear(minValue.getFullYear() - 1);
+                break;
+            default:
+                minValue = axisXMin;
+        }
+
+        chart.axisX[0].set("minimum", new Date(minValue));
+        chart.axisX[0].set("maximum", new Date(axisXMax));
+    });
+</script>
+<div id="update-nav">
+    <div id="range-selector">
+        <input type="button" id="1m" class="period ui-button" value="1m" />
+        <input type="button" id="3m" class="period ui-button" value="3m" />
+        <input type="button" id="6m" class="period ui-button" value="6m" />
+        <input type="button" id="1y" class="period ui-button" value="1y" />
+        <input type="button" id="all" class="period ui-button" value="All" />
+    </div>
+    <div id="date-selector" class="">
+        From:<input type="text" id="fromDate" class="ui-widget">
+        To:<input type="text" id="toDate" class="ui-widget">
+    </div>
+</div>
+<br />
+<div id="chartContainer" style="height: 360px; width: 100%;"></div>
+<style>
+
+    #update-nav {
+        width: 100%;
+        height: 30px;
+    }
+
+    #range-selector {
+        width: 50%;
+        float: left;
+    }
+
+    #date-selector {
+        width: 50%;
+        float: right;
+    }
+
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+
+    .box-body {
+        padding-top: 10px;
+        border-style: ridge;
+        border-block-color: black;
+    }
+
+    .row {
+        border-style: ridge;
+        border-radius: 2em;
+    }
+
+    .col-lg-3 col-xs-6 {
+        margin-top: 20px;
+        border-style: ridge;
+        border-radius: 2em;
+    }
+</style>
+
+<div id="chartContainer3" style="width: 45%; height: 300px;display: inline-block;">
+    <script>
+
+        var chart = new CanvasJS.Chart("chartContainer3",
+            {
+                animationEnabled: true,
+                title: {
+                    text: "Line Chart"
+                },
+                axisX: {
+                    valueFormatString: "MMM",
+                    interval: 1,
+                    intervalType: "month"
+                },
+                axisY: {
+                    includeZero: false
+                },
+                data: [
+                    {
+                        type: "line",
+                        dataPoints: [
+                            { x: new Date(2012, 00, 1), y: 450 },
+                            { x: new Date(2012, 01, 1), y: 414 },
+                            { x: new Date(2012, 02, 1), y: 520, indexLabel: "highest", markerColor: "red", markerType: "triangle" },
+                            { x: new Date(2012, 03, 1), y: 460 },
+                            { x: new Date(2012, 04, 1), y: 450 },
+                            { x: new Date(2012, 05, 1), y: 500 },
+                            { x: new Date(2012, 06, 1), y: 480 },
+                            { x: new Date(2012, 07, 1), y: 480 },
+                            { x: new Date(2012, 08, 1), y: 410, indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" },
+                            { x: new Date(2012, 09, 1), y: 500 },
+                            { x: new Date(2012, 10, 1), y: 480 },
+                            { x: new Date(2012, 11, 1), y: 510 }
+                        ]
+                    }
+                ]
+            });
+        chart.render();
+    </script>
+</div>

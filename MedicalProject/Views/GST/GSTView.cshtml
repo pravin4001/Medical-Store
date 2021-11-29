@@ -1,0 +1,100 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "GSTView";
+}
+
+@{
+    Html.RenderPartial("_SideLayout");
+}
+<div class="container">
+    <div class="content-container">
+
+
+
+        <div class="container-fluid">
+
+
+            <h2 style="text-align:center">List</h2>
+
+
+
+            @using (Html.BeginForm("GSTView", "GST", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div style="margin-top:-10px; margin-left:650px;">
+                        <input type="submit" value="Delete All" class="btn btn-danger" onclick="return confirm('Are you sure?')" />
+                        <input type="button" value="Add GST" class="btn btn-success" onclick="location.href='@Url.Action("GSTInsert","GST")'" />
+                    </div>
+
+
+                </div>
+               
+
+
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Select</th>
+                        <th>HSNCODE </th>
+                        <th>CGST(%)</th>
+                        <th>SGST(%)</th>
+                        <th>IGST(%)</th>
+                        <th>IS Exempted</th>
+
+
+
+                    </tr>
+                    @for (int i = 0; i < Model.Rows.Count; i++)
+                    {
+                        <tr>
+
+                            <td><input type="checkbox" name="checks" id="checks" value="@Model.Rows[i][0]" /></td>
+
+                            <td>@Model.Rows[i][0]</td>
+                            <td>@Model.Rows[i][1]</td>
+                            <td>@Model.Rows[i][2]</td>
+                            <td>@Model.Rows[i][3]</td>
+                            <td>@Model.Rows[i][7]</td>
+
+
+                            <td>
+
+                                <a href="@Url.Action("GSTUpdate","GST", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-warning" onclick="return confirm ('Are you sure want to Update blog?');">
+                                    <i class="glyphicon glyphicon-remove">   </i> Update
+                                </a>
+
+                                &nbsp; <a href="@Url.Action("GSTDelete","GST", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-danger" onclick="return confirm ('Are you sure want to delete blog?');">
+                                    <i class="glyphicon glyphicon-remove"></i>    Delete
+                                </a>
+
+
+                            </td>
+
+
+                        </tr>
+                    }
+
+
+
+                </table>
+                <div class="form-group">
+
+
+
+
+                </div>
+            }
+            @*<p><a href="@Url.Action("GSTInsert","GST")">Add GST</a></p>*@
+
+
+        </div>
+    </div>
+</div>
+<style>
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+</style>

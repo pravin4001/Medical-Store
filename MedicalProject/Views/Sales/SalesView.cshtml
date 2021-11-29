@@ -1,0 +1,115 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "SalesView";
+}
+
+@{
+    Html.RenderPartial("_SideLayout");
+}
+<div class="container">
+    <div class="content-container">
+
+
+
+        <div class="container-fluid">
+
+            <h2 style="text-align:center">List Of Sales</h2>
+
+
+
+            @using (Html.BeginForm("SalesView", "Sales", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div style="margin-top:-10px; margin-left:650px;">
+                        <input type="submit" value="Delete All" class="btn btn-danger" onclick="return confirm('Are you sure?')" />
+                        <input type="button" value="Add Sales" class="btn btn-success" onclick="location.href='@Url.Action("SalesInsert","Sales")'" />
+                    </div>
+
+
+                </div>
+               
+
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Select</th>
+                        <th>Customer Name </th>
+                        <th>Product Name </th>
+                        <th>Category Name </th>
+                        <th> Quantity</th>
+                        <th> Product Price(₹) </th>
+                        <th> Base Price</th>
+                        <th> CGST (₹)</th>
+                        <th> SGST (₹)</th>
+                        <th>GST Net (₹)</th>
+                        <th>Net Price (₹) </th>
+                        <th>Payment Method </th>
+                        <th>Status of Payment</th>
+
+
+
+                    </tr>
+                    @for (int i = 0; i < Model.Rows.Count; i++)
+                    {
+                <tr>
+
+                    <td><input type="checkbox" name="checks" id="checks" value="@Model.Rows[i][0]" /></td>
+
+
+                    <td>@Model.Rows[i][1]</td>
+                    <td>@Model.Rows[i][2]</td>
+                    <td>@Model.Rows[i][3]</td>
+                    <td>@Model.Rows[i][4]</td>
+                    <td>@Model.Rows[i][5]</td>
+                    <td>@Model.Rows[i][6]</td>
+                    <td>@Model.Rows[i][7]</td>
+                    <td>@Model.Rows[i][8]</td>
+                    <td>@Model.Rows[i][9]</td>
+                    <td>@Model.Rows[i][10]</td>
+                    <td>@Model.Rows[i][11]</td>
+                    <td>@Model.Rows[i][12]</td>
+
+
+
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Operation
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li> <a href="@Url.Action("SalesUpdate","Sales", new { @id=Model.Rows[i][0]})">Edit</a></li>
+                                <li> <a href="@Url.Action("Report","Sales", new { @id=Model.Rows[i][0]})">Invoice</a></li>
+
+                                <li><a href="@Url.Action("SalesDelete","Sales", new { @id=Model.Rows[i][0]})" onclick="return confirm ('Are you sure want to delete blog?');">Remove</a></li>
+                            </ul>
+                        </div>
+                    </td>
+
+
+
+                </tr>
+                    }
+
+
+
+                </table>
+
+            }
+            @*<p><a href="@Url.Action("SalesInsert","Sales")">Add Order</a></p>*@
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<style>
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+</style>

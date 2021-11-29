@@ -1,0 +1,127 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "PurchaseView";
+}
+
+@{
+    Html.RenderPartial("_SideLayout");
+}
+<div class="container">
+    <div class="content-container">
+
+
+
+        <div class="container-fluid">
+
+
+
+            <h2 style="text-align:center">List Of Purchase</h2>
+
+
+
+
+            @using (Html.BeginForm("PurchaseView", "Purchase", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div style="margin-top:-10px; margin-left:650px;">
+                        <input type="submit" value="Delete All" class="btn btn-danger" onclick="return confirm('Are you sure?')" />
+                        <input type="button" value="Add Purchase" class="btn btn-success" onclick="location.href='@Url.Action("PurchaseInsert","Purchase")'" />
+                    </div>
+
+
+                </div>
+               
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Select</th>
+                        <th>Supplier Name </th>
+                        <th>Purchase Date</th>
+                        <th>Category Name</th>
+                        <th>Sub Category Name</th>
+                        <th>Product Name</th>
+                        <th> Quantity (Unit)</th>
+                        <th> Price (₹)</th>
+                        <th>Net Amount (₹)</th>
+                        <th>Method Name</th>
+                        <th>Payment Status</th>
+
+
+
+
+                    </tr>
+                    @for (int i = 0; i < Model.Rows.Count; i++)
+                    {
+                <tr>
+
+                    <td><input type="checkbox" name="checks" id="checks" value="@Model.Rows[i][0]" /></td>
+
+
+                    <td>@Model.Rows[i][1]</td>
+                    <td>@Model.Rows[i][2]</td>
+                    <td>@Model.Rows[i][3]</td>
+                    <td>@Model.Rows[i][4]</td>
+                    <td>@Model.Rows[i][5]</td>
+                    <td>@Model.Rows[i][6]</td>
+                    <td>@Model.Rows[i][7]</td>
+                    <td>@Model.Rows[i][8]</td>
+                    <td>@Model.Rows[i][9]</td>
+                    <td>@Model.Rows[i][10]</td>
+
+                   
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Operation
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li> <a href="@Url.Action("PurchaseUpdate","Purchase", new { @id=Model.Rows[i][0]})">Edit</a></li>
+                                <li> <a href="@Url.Action("Report","Purchase", new { @id=Model.Rows[i][0]})">Invoice</a></li>
+                          
+                                <li><a href="@Url.Action("PurchaseDelete","PurchaseDelete", new { @id=Model.Rows[i][0]})" onclick="return confirm ('Are you sure want to delete blog?');">Remove</a></li>
+                            </ul>
+                        </div>
+                    </td>
+
+                  
+                            @*<td>
+
+                                <a href="@Url.Action("PurchaseUpdate","Purchase", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-warning" onclick="return confirm ('Are you sure want to Update blog?');">
+                                    <i class="glyphicon glyphicon-remove"></i> Update
+                                </a>
+
+                            </td>
+                            <td>
+                                <a href="@Url.Action("PurchaseDelete","Purchase", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-danger" onclick="return confirm ('Are you sure want to delete blog?');">
+                                    <i class="glyphicon glyphicon-remove"></i> Delete
+                                </a>
+
+                            </td>*@
+
+
+                </tr>
+                    }
+
+
+
+                </table>
+
+            }
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+<style>
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+</style>

@@ -1,0 +1,117 @@
+﻿
+@model System.Data.DataTable
+@{
+    ViewBag.Title = "Category";
+}
+
+@{
+    Html.RenderPartial("_SideLayout");
+}
+<div class="container">
+    <div class="content-container">
+
+
+        <div class="container-fluid">
+            <div class="form-group">
+                <h2 style="text-align:center">List Of Category</h2>
+               
+            </div>
+            @using (Html.BeginForm("CategoryView", "User", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div style="margin-top:-10px; margin-left:650px;">
+                        <input type="submit" value="Delete All" class="btn btn-danger" onclick="return confirm('Are you sure?')" />
+                        <input type="button" value="Add Category" class="btn btn-success" onclick="location.href='@Url.Action("CategoryInsert","User")'" />
+                    </div>
+
+
+                </div>
+
+
+
+
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Select</th>
+                        <th> ID</th>
+                        <th> Name</th>
+                        <th>Description</th>
+                        <th>Active</th>
+
+
+
+                    </tr>
+                    @for (int i = 0; i < Model.Rows.Count; i++)
+                    {
+
+                        if (Convert.ToBoolean(Model.Rows[i][6]))
+                        {
+
+
+
+                            ViewBag.active = "Yes";
+
+
+
+                        }
+                        else
+                        {
+                            ViewBag.active = "NO";
+
+
+
+                        }
+
+
+                <tr>
+
+                    <td><input type="checkbox" name="checks" id="checks" value="@Model.Rows[i][0]" /></td>
+
+                    <td>@Model.Rows[i][0]</td>
+                    <td>@Model.Rows[i][1]</td>
+                    <td>@Model.Rows[i][2]</td>
+                    <td>@ViewBag.active</td>
+
+
+
+                    <td>
+
+                        <a href="@Url.Action("CategoryUpdate","User", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-warning" onclick="return confirm ('Are you sure want to Update blog?');">
+                            <i class="glyphicon glyphicon-remove"></i> Update
+                        </a>
+                        <a href="@Url.Action("CategoryDelete","User", new {@id=Model.Rows[i][0]})" class="btn btn-sm btn-danger" onclick="return confirm ('Are you sure want to delete blog?');">
+                            <i class="glyphicon glyphicon-remove"></i> Delete
+                        </a>
+
+
+
+
+                    </td>
+
+
+                </tr>
+                    }
+
+
+
+                </table>
+
+            }
+            @*<p><a href="@Url.Action("CategoryInsert","User")">Add Category</a></p>*@
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+</style>

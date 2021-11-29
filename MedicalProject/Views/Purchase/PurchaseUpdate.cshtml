@@ -1,0 +1,139 @@
+﻿@model MedicalProject.Models.Purchase
+
+@{
+    ViewBag.Title = "PurchaseUpdate";
+
+}
+@{
+    Html.RenderPartial("_SideLayout");
+}
+<div class="container">
+    <div class="content-container">
+
+
+
+        <div class="container-fluid">
+
+            <h2></h2>
+
+            @using (Html.BeginForm())
+            {
+                <div class="container-fluid" style="padding-left:0px; margin-top:40px; margin-left:00px;">
+                    <div class="row-fluid">
+                        <div class="center-block roundedDiv col-lg-offset-3" style="width:400px; height:250px;">
+                            <div style="max-width: 500px;">
+                                <h2 class="form-signin-heading">
+
+                                    Purchase 
+                                </h2>
+                                <div class="table" table-layout:auto style="border-block-style:solid">
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+
+                                        <hr />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.PurchaseId)
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.SupplierId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.DropDownListFor(model => model.SupplierId, (IEnumerable<SelectListItem>)ViewBag.suply, "Select Supplier", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(model => model.PurchaseDate, new { @max = "2021-10-30", @type = "date", @class = "form-control datepicker", @Value = Model.PurchaseDate.ToString("yyyy-MM-dd") })
+                                                @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.DropDownListFor(model => model.CategoryId, (IEnumerable<SelectListItem>)(ViewBag.catlog), "Select Category", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.SubCategoryId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.DropDownListFor(model => model.SubCategoryId, (IEnumerable<SelectListItem>)(ViewBag.subcatlog), "Select SubCategory", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.DropDownListFor(model => model.ProductId, (IEnumerable<SelectListItem>)(ViewBag.product), "Select Product", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.PurchaseQuantity, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.PurchaseQuantity, new { htmlAttributes = new { @class = "form-control", @min = "0" } })
+                                                @Html.ValidationMessageFor(model => model.PurchaseQuantity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.PaymentMethodId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.DropDownListFor(model => model.PaymentMethodId, (IEnumerable<SelectListItem>)(ViewBag.payment), "Select Payment Method", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.PaymentMethodId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.StatusId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-8">
+                                                @Html.DropDownListFor(model => model.StatusId, (IEnumerable<SelectListItem>)(ViewBag.status), "Select Payment Method", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-offset-4 col-md-10">
+                                                <input type="submit" value="Save" class="btn btn-warning" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "PurchaseView")
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+</style>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

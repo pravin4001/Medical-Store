@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Pharmacy Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="bower_components/morris.js/morris.css">
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:black;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Pharmacy", "UserDetails", "Login", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+               
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                        <li>@Html.ActionLink("Category", "CategoryView", "User")</li>
+                <li>@Html.ActionLink("SubCategory", "SubCategoryView", "SubCategory")</li>
+                <li>@Html.ActionLink("GST", "GSTView", "GST")</li>
+                <li>@Html.ActionLink("Customer", "CustomerView", "Customer")</li>
+                <li>@Html.ActionLink("Supplier", "SupplierView", "Supplier")</li>
+                <li>@Html.ActionLink("Payment Method", "PaymentMethodView", "PaymentMethod")</li>
+                <li>@Html.ActionLink("Payment Status", "StatusView", "Status")</li>
+                <li>@Html.ActionLink("Products", "ProductView", "Product")</li>
+                <li>@Html.ActionLink("Purchase", "PurchaseView", "Purchase")</li>
+                <li>@Html.ActionLink("Sales", "SalesView", "Sales")</li>
+
+
+                        <li>@Html.ActionLink("Logout", "LoginForm", "Login")</li>
+
+                    </ul>
+                    @*<p>@Html.ActionLink("User", "UserDetails", "Login")</p>*@
+            </div>
+        </div>
+
+    </div>
+   
+    @*<div class="container-fluid" style="margin-left: auto; margin-top:1px; float:left; width:95.33% ; ">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar" style="background-color:black;">
+                <ul class="nav">
+                    <li style="margin-top:30px;">
+
+                        <a href="@Url.Action("CategoryView", "User")">
+                            <h4> <span style="color:blue; " class=" ">Category</span></h4>
+                        </a>
+
+                        <a href="@Url.Action("SubCategoryView", "SubCategory")">
+                            <h4 style=" color: white"><span class="">SubCategory</span></h4>
+                        </a>
+                        <a href="@Url.Action("GSTView", "GST")">
+                            <h4 style="color: white"><span class=" ">GST</span></h4>
+                        </a>
+                        <a href="@Url.Action("CustomerView", "Customer")">
+                            <h4 style="color: white"><span class="">Customer</span></h4>
+                        </a>
+                        <a href="@Url.Action("SupplierView", "Supplier")">
+                            <h4 style="color: white"><span class="">Supplier</span></h4>
+                        </a>
+                        <a href="@Url.Action("PaymentMethodView", "PaymentMethod")">
+                            <h4 style="color: white"><span class=" ">Payment Method</span></h4>
+                        </a>
+                        <a href="@Url.Action("StatusView", "Status")">
+                            <h4 style="color: white"><span class=" ">Payment Status</span></h4>
+                        </a>
+                        <a href="@Url.Action("ProductView", "Product")">
+                            <h4 style="color: white"><span class=" ">Products</span></h4>
+                        </a>
+                        <a href="@Url.Action("PurchaseView", "Purchase")">
+                            <h4 style="color: white"><span class=" ">Purchase </span></h4>
+                        </a>
+                        <a href="@Url.Action("SalesView", "Sales")">
+                            <h4 style="color: white"><span class=" ">Sales </span></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-md-10 main">
+                @RenderBody()*@
+                <div class="container body-content">
+                    @RenderBody()
+
+                @*<footer>
+                    <p>&copy; @DateTime.Now.Year - Pharmacy Application</p>
+                </footer>*@
+            </div>
+        @*</div>
+    </div>*@
+   
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

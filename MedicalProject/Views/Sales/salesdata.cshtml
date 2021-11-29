@@ -1,0 +1,213 @@
+﻿
+    @*@model  IEnumerable<MedicalProject.Models.Sales>*@
+
+@model MedicalProject.Models.Sales
+
+@{
+    ViewBag.Title = "SalesInsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="container">
+    <div class="content-container">
+
+
+        <div class="container-fluid">
+
+            <form method="post" action="Salesdata">
+                <div class="form-group">
+                    <div class="container-fluid" style="padding-left:0px; margin-top:-20px; margin-left:00px;">
+                        <div class="row-fluid">
+                            <div class="center-block roundedDiv col-lg-offset-3" style="width:400px; height:250px;">
+                                <div style="max-width: 500px;">
+                                    <h2 class="form-signin-heading">
+
+                                        Add Products
+                                    </h2>
+                                    <div class="table" table-layout:auto style="border-block-style:solid">
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal">
+
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.SalesMasterId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.SalesMasterId, (IEnumerable<SelectListItem>)(ViewBag.catlog), "Select Category", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.SalesMasterId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.CategeoryId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.CategeoryId, (IEnumerable<SelectListItem>)(ViewBag.catlog), "Select Category", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.CategeoryId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.SubCategeoryId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.SubCategeoryId, (IEnumerable<SelectListItem>)(ViewBag.subcatlog), "--Select SubCategory--", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.SubCategeoryId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.ProductId, (IEnumerable<SelectListItem>)(ViewBag.product), "--Select Product--", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.SalesQuantity, htmlAttributes: new { @class = "control-label col-md-3" })
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.SalesQuantity, new { htmlAttributes = new { @class = "form-control", @min = "0" } })
+                                                    @Html.ValidationMessageFor(model => model.SalesQuantity, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+                                            @*<div class="form-group">
+                                                    @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" value="@Model.CustomerId" runat="server"><span class="glyphicon glyphicon-user"></span> Select <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu" onclick="location.href='@Url.Action("SalesInsert", "Sales", new {CustomerId = Model.CustomerId })'">
+                                                            @foreach (var user in (IEnumerable<SelectListItem>)(ViewBag.customer))
+                                                            {
+                                                                <li>@user.Text</li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>*@
+
+
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-4 col-md-10">
+                                                    <input type="submit" value="Add" class="btn btn-success" />
+                                                </div>
+                                            </div>
+
+
+                                              <input type="button" value="Save Order" class="btn btn-success" onclick="location.href='@Url.Action("OrderInsert","Sales")'" />
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <div>
+                @Html.ActionLink("Back to List", "SalesView")
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid" style="padding-left:50px; margin-left:300px;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategeoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategeoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesQuantity)
+            </th>
+            <th></th>
+        </tr> 
+        @*@foreach (var df in ViewBag.data)
+        {
+            <tr>
+                <td>@df</td>
+                <td>@df.CategeoryId</td>
+                <td>@df.SubCategeoryId</td>
+                <td>@df.ProductId</td>
+                <td>@df.SalesQuantity</td>
+
+            </tr>
+
+        }*@
+        @*@foreach (var df in (IEnumerable<>)TempData["Sales"])
+            {
+                <tr>
+                    <td>@df.CategoryId</td>
+                    <td>@df.SubCategoryId</td>
+                    <td>@df.ProductId</td>
+                    <td>@df.SalesQuantity</td>
+                </tr>
+
+
+
+            }*@
+    </table>
+</div>
+<style>
+    .content-container {
+        padding-top: 20px;
+    }
+
+    .content-container {
+        padding-left: 220px;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesQuantity)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalesQuantity)
+                    </td>
+                </tr>
+            }
+    </table>*@
+
